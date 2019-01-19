@@ -11,12 +11,13 @@
    true   // = 1
  };
 
-/* Or in combination with typedef:
- *
- * typedef enum {
- *   false,
- *   true
- * } BOOLEAN;
+/* Changing default values, and in combination with typedef: */
+typedef enum {
+  club = 0,
+  spades = 3,
+  diamonds = 10,
+  hearts = 20
+} suit;
 
 /* Declaring a variable with an unnamed enum type: */
 enum { no, yes } response;
@@ -40,6 +41,8 @@ int main() {
     test6,
     test7,
     test8);
+
+  printf("score: %d\n", hearts + 2 * diamonds);
 
   return 0;
 }

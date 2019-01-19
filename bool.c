@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-// C types: char, int, float, double
 // There is no bool. int 0 is false, int 1 is true.
 
 #ifndef __cpluplus
