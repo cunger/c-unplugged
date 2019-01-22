@@ -27,17 +27,16 @@ int main() {
   printf(" x = %d\n", x);
   printf(" y = %d\n", y);
 
-  /* When declaration a pointer, initialize it to 0,
-     which is an invalid address. */
+  /* When declaring a pointer without a particular value to point at,
+     initialize it to 0, which is an invalid address. */
 
   int * null_pointer = 0;
 
-  char whoop = 'y';
-  char * wp = &whoop;
+  /* Safe guard: When using a pointer, first check whether it's valid. */
 
-  if (wp) { printf("%c\n", *wp); }
+  if (null_pointer) { printf("%d\n", *null_pointer); }
 
-  // Function pointers
+  /* TODO Function pointers */
 
   return 0;
 }

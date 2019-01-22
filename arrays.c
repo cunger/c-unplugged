@@ -4,13 +4,19 @@ int * max(int * begin, int * end);
 
 int main() {
 
+  /* The array is allocated one block of memory. */
+
   int array1[]  = { 1 }; // { 1 }
   int array2[4] = { 1 }; // { 1, 0, 0, 0 }
 
   int numbers[3] = { 200, 404, 500 };
 
-  /* Arrays don't carry runtime information, so there's no way to get the length
-     of an array at runtime. It needs to be determined at compile time:
+  /* Array size is fixed at compile time, or at latest when the array is created
+     at runtime. Dynamically re-sizing it requires explicit effort in re-allocating
+     memory.
+
+     Arrays don't carry runtime information, so there's no way to get the length
+     of an array at runtime. Determining it at compile time:
 
      sizeof(numbers) is 12 (3 times 4 bytes for an integer)
    */
@@ -55,13 +61,6 @@ int main() {
   } else {
     printf("Ha.\n");
   }
-
-  /* String literals are arrays of characters. */
-
-  // char * string = "Fnord!";
-  // char string[] = "Fnord!";
-
-  char buffer[1024] = { 0 };
 
   return 0;
 }
