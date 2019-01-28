@@ -9,3 +9,5 @@
 
 * `%c` character (`char`)
 * `%s` string (`char *`)
+
+Also see `man 3 printf`.

@@ -34,3 +34,15 @@ Running only the GCC preprocessor:
 ```
 $ gcc -E main.c
 ```
+
+Using `make` for compiling and linking:
+```
+$ make main
+cc main.c -o main
+```
+
+Or with options:
+```
+$ CFLAGS="-Wall" make main
+cc -Wall main.c -o main
+```
