@@ -7,7 +7,9 @@
 * `%.2f` print as floating point, 2 decimal points
 * `%6.2f` print as floating point, at least 6 characters wide and 2 decimal points
 
-* `%c` character (`char`)
-* `%s` string (`char *`)
+* `%c` print character (`char`)
+* `%s` print string (`char *`)
+
+* `%p` print pointer
 
 Also see `man 3 printf`.
