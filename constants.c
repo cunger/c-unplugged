@@ -1,10 +1,14 @@
 #include <stdio.h>
 
-/* Preprocessor will replace every occurence of the constant
-   with the respective value. */
+/* As #define preprocessor directive: */
+
 #define MIN 0
 #define MAX 100
 #define STEP 2
+
+/* The preprocessor will replace every occurence of the constant
+   with the respective value. Note that this is purely symbolic
+   string replacement; there's no checks. */
 
 void whoop() {
   /* Re-initialized every time the function is called. */

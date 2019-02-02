@@ -9,10 +9,13 @@ Files:
 See `main.c`:
 
 ```c
-#include "commons.h"
-/* Not parsed by the compiler.
- * The preprocessor will replace this by the content of commons.h,
-   which thus includes the required function declarations in main.c. */
+#include "commons.h" // including a local file
+#include <stdio.h>   // including a system library
+
+/* #include is a preprocessor directive, i.e. it is not parsed by the compiler.
+   The preprocessor simply replaces the #include directive by the content of
+   the specified files, without any checks.
+   This thus includes the required function declarations in main.c. */
 
 int main() {
   fnord();
