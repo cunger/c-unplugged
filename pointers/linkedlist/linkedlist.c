@@ -1,17 +1,58 @@
-/*
- * Linked List
- */
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
-struct node {
-  int data;
-  struct node * next;
-};
+#include "linkedlist.h"
 
-typedef struct node node;
-typedef node * linkedlist;
+node * init(int element) {
+  node * new_node = malloc(sizeof(node));
+  assert(new_node != NULL);
+
+  new_node->data = element;
+  new_node->next = NULL;
+
+  return new_node;
+}
+
+node * last(linkedlist list) {
+  node * n = list;
+  while (n->next) {
+    n = n->next;
+  }
+
+  return n;
+}
+
+void add(linkedlist * list, int element) {
+  node * new_node = init(element);
+
+  (last(*list))->next = new_node;
+}
+
+void destroy(linkedlist * list) {
+  node * curr_node = *list;
+  node * next_node;
+
+  while (curr_node->next) {
+    next_node = curr_node->next;
+    free(curr_node);
+    curr_node = next_node;
+  }
+
+  free(curr_node);
+}
+
+int length(linkedlist list) {
+  int count = 0;
+
+  linkedlist current = list;
+  while (current) {
+    ++count;
+    current = current->next;
+  }
+
+  return count;
+}
 
 void pretty_print(linkedlist list) {
   printf("{");
@@ -28,59 +69,4 @@ void pretty_print(linkedlist list) {
   }
 
   printf("}\n");
-}
-
-linkedlist init_linked_list() {
-  return NULL;
-}
-
-void add(linkedlist * p_list, int element) {
-  node new_node = { element, NULL };
-
-  if (*p_list == NULL) {
-    *p_list = &new_node;
-  } else {
-    linkedlist last = *p_list;
-    while (last) {
-      last = last->next;
-    }
-
-    (*last).next = &new_node;
-  }
-}
-
-int length(linkedlist list) {
-  int count = 0;
-
-  linkedlist current = list;
-  while (current) {
-    ++count;
-    current = current->next;
-  }
-
-  return count;
-}
-
-int main() {
-  node third  = { 3, NULL };
-  node second = { 2, &third };
-  node first  = { 1, &second };
-
-  linkedlist numbers = &first;
-
-  pretty_print(numbers);
-  printf("length: %d\n", length(numbers));
-
-  linkedlist numbers_again = init_linked_list();
-
-  pretty_print(numbers_again);
-  printf("length: %d\n", length(numbers_again));
-
-  add(&numbers_again, 1);
-  add(&numbers_again, 2);
-
-  pretty_print(numbers_again);
-  printf("length: %d\n", length(numbers_again));
-
-  return 0;
 }
