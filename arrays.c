@@ -18,10 +18,10 @@ int main() {
      Arrays don't carry runtime information, so there's no way to get the length
      of an array at runtime. Determining it at compile time:
 
-     sizeof(numbers) is 12 (3 times 4 bytes for an integer)
+     sizeof(numbers) = 3 times 4 bytes for an integer = 12
    */
 
-  int length = sizeof(numbers) / sizeof(numbers[0]); // 3
+  int length = sizeof(numbers) / sizeof(int); // 3
 
   /* Pointers */
 
