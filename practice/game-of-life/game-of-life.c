@@ -21,15 +21,42 @@ Grid* init_generation(void) {
     Grid* grid = malloc(sizeof(Grid));
     assert(grid);
 
-    int i;
-    int j;
-    for (i = 0; i < GRID_HEIGHT; i++) {
-        for (j = 0; j < GRID_WIDTH; j++) {
-            *grid[i][j] = random_cell(PRIOR_PROBABILITY_TO_BE_ALIVE);
+    int row;
+    int column;
+    for (row = 0; row < GRID_HEIGHT; row++) {
+        for (column = 0; column < GRID_WIDTH; column++) {
+            *grid[row][column] = random_cell(PRIOR_PROBABILITY_TO_BE_ALIVE);
         }
     }
 
     return grid;
+}
+
+Grid* next_generation(Grid* grid, evolve e) {
+    Grid* next_grid = malloc(sizeof(Grid));
+    assert(next_grid);
+
+    int row;
+    int column;
+    for (row = 0; row < GRID_HEIGHT; row++) {
+        for (column = 0; column < GRID_WIDTH; column++) {
+            Cell neighbors[NUMBER_OF_NEIGHBORS] = {
+                get_cell(grid, row - 1, column - 1),
+                get_cell(grid, row - 1, column),
+                get_cell(grid, row - 1, column + 1),
+                get_cell(grid, row, column - 1),
+                /* get_cell(row, column) is the cell itself, not a neighbor. */
+                get_cell(grid, row, column + 1),
+                get_cell(grid, row + 1, column - 1),
+                get_cell(grid, row + 1, column),
+                get_cell(grid, row + 1, column + 1),
+            };
+
+            *next_grid[row][column] = evolve_cell(neighbors);
+        }
+    }
+
+    return next_grid;
 }
 
 Cell random_cell(double prior_probability_to_be_alive) {
@@ -38,6 +65,14 @@ Cell random_cell(double prior_probability_to_be_alive) {
 
     double random = (double) rand() / (double) ((unsigned) RAND_MAX + 1);
     return (random < prior_probability_to_be_alive ? ALIVE : DEAD);
+}
+
+int out_of_bounds(int row, int column) {
+    return row < 0 || column < 0 || row == GRID_HEIGHT || column == GRID_WIDTH;
+}
+
+Cell get_cell(Grid* grid, int row, int column) {
+    return out_of_bounds(row, column) ? DEAD : *grid[row][column];
 }
 
 int count_alive(Cell cells[], int size) {
