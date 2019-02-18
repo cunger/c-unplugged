@@ -2,22 +2,30 @@
 #include <assert.h>
 #include "game-of-life.h"
 
-void print_cells(Cell cells[8]);
+void print_cells(Cell cells[NUMBER_OF_NEIGHBORS]);
+
+void test_random_cell(void);
 void test_evolve_cell(void);
 
 int main(void) {
+    test_random_cell();
     test_evolve_cell();
+}
+
+void test_random_cell(void) {
+    assert(random_cell(1) == ALIVE);
+    assert(random_cell(0) == DEAD);
 }
 
 void test_evolve_cell(void) {
     int n;
-    for (n = 0; n <= 8; n++) {
+    for (n = 0; n <= NUMBER_OF_NEIGHBORS; n++) {
         /* Create an array of eight neighbors,
            where n are alive and the rest is dead. */
 
-        Cell neighbors[8];
+        Cell neighbors[NUMBER_OF_NEIGHBORS];
         int i;
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < NUMBER_OF_NEIGHBORS; i++) {
             neighbors[i] = i < n ? ALIVE : DEAD;
         }
 
@@ -34,12 +42,11 @@ void test_evolve_cell(void) {
             assert(evolve_cell(neighbors) == ALIVE);
         }
     }
-
 }
 
-void print_cells(Cell cells[8]) {
+void print_cells(Cell cells[NUMBER_OF_NEIGHBORS]) {
     int i;
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < NUMBER_OF_NEIGHBORS; i++) {
         printf("%d ", cells[i]);
     }
     printf("\n");

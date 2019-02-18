@@ -4,19 +4,35 @@ int * max(int * begin, int * end);
 
 int main() {
 
-  /* The array is allocated one block of memory. */
+  /* Syntax for creating a local array on the stack, where it is allocated
+     one fixed-size block of memory: */
 
   int array1[]  = { 1 }; // { 1 }
   int array2[4] = { 1 }; // { 1, 0, 0, 0 }
 
   int numbers[3] = { 200, 404, 500 };
 
-  /* Array size is fixed at compile time, or at latest when the array is created
-     at runtime. Dynamically re-sizing it requires explicit effort in re-allocating
-     memory.
+  /* Importantly, array size on the stack is fixed at compile time.
 
-     Arrays don't carry runtime information, so there's no way to get the length
-     of an array at runtime. Determining it at compile time:
+     Allocating memory for an array on the heap, on the other hand,
+     allows for the size to be define at run time, when the array
+     is created. */
+
+  int *numbers_alternative;
+  numbers_alternative = (int*) malloc(sizeof(int) * 3);
+
+  /* numbers_alternative can now be used exactly like numbers. */
+
+  free(numbers_alternative);
+
+  /* Dynamically re-sizing an array requires explicit effort in re-allocating
+     memory (where realloc takes care of copying over the old elements). */
+
+     numbers_alternative = realloc(numbers_alternative, sizeof(int) * 10);
+
+  /* Also, arrays are mainly pointers to the base address, they don't
+     carry runtime information, so there's no way to get the length of an
+     array at runtime; it needs to be determined at compile time:
 
      sizeof(numbers) = 3 times 4 bytes for an integer = 12
    */
