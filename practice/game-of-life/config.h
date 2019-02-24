@@ -1,7 +1,7 @@
 /* Grid parameters */
 
-#define GRID_WIDTH  40
-#define GRID_HEIGHT 40
+#define GRID_WIDTH 10
+#define GRID_HEIGHT 10
 
 /* Game parameters */
 

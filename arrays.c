@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+/*
+"Pointer arithmetic and array indexing are equivalent in C, pointers and arrays are different." 
+-- Wayne Throop
+*/
+
 int * max(int * begin, int * end);
 
 int main() {

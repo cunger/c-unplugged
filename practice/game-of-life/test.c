@@ -15,6 +15,20 @@ int main(void) {
 void test_random_cell(void) {
     assert(random_cell(1) == ALIVE);
     assert(random_cell(0) == DEAD);
+
+    srand(time(NULL));
+
+    char cells[NUMBER_OF_NEIGHBORS] = {};
+    int i;
+    for (i = 0; i < NUMBER_OF_NEIGHBORS; i++) {
+        cells[i] = random_cell(0.5);
+    }
+
+    printf("Random: ");
+    print_cells(cells);
+
+    assert(count_alive(cells, NUMBER_OF_NEIGHBORS) > 0);
+    assert(count_alive(cells, NUMBER_OF_NEIGHBORS) < 8);
 }
 
 void test_evolve_cell(void) {
@@ -47,7 +61,7 @@ void test_evolve_cell(void) {
 void print_cells(Cell cells[NUMBER_OF_NEIGHBORS]) {
     int i;
     for (i = 0; i < NUMBER_OF_NEIGHBORS; i++) {
-        printf("%d ", cells[i]);
+        printf("%c ", cells[i]);
     }
     printf("\n");
 }
