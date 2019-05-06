@@ -1,2 +1,0 @@
-void fnord();
-void blah();
